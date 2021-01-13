@@ -1,0 +1,91 @@
+package com.emrekose.videogames.data.remote.model.detail
+
+
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class GameDetailResponse(
+    @Json(name = "achievements_count")
+    val achievementsCount: Int,
+    @Json(name = "added")
+    val added: Int,
+    @Json(name = "additions_count")
+    val additionsCount: Int,
+    @Json(name = "alternative_names")
+    val alternativeNames: List<String>,
+    @Json(name = "background_image")
+    val backgroundImage: String,
+    @Json(name = "background_image_additional")
+    val backgroundImageAdditional: String,
+    @Json(name = "creators_count")
+    val creatorsCount: Int,
+    @Json(name = "description")
+    val description: String,
+    @Json(name = "description_raw")
+    val descriptionRaw: String,
+    @Json(name = "dominant_color")
+    val dominantColor: String,
+    @Json(name = "game_series_count")
+    val gameSeriesCount: Int,
+    @Json(name = "id")
+    val id: Int,
+    @Json(name = "metacritic")
+    val metacritic: Int,
+    @Json(name = "metacritic_url")
+    val metacriticUrl: String,
+    @Json(name = "movies_count")
+    val moviesCount: Int,
+    @Json(name = "name")
+    val name: String,
+    @Json(name = "name_original")
+    val nameOriginal: String,
+    @Json(name = "parent_achievements_count")
+    val parentAchievementsCount: Int,
+    @Json(name = "parents_count")
+    val parentsCount: Int,
+    @Json(name = "playtime")
+    val playtime: Int,
+    @Json(name = "rating")
+    val rating: Double,
+    @Json(name = "rating_top")
+    val ratingTop: Int,
+    @Json(name = "ratings_count")
+    val ratingsCount: Int,
+    @Json(name = "reddit_count")
+    val redditCount: Int,
+    @Json(name = "reddit_description")
+    val redditDescription: String,
+    @Json(name = "reddit_logo")
+    val redditLogo: String,
+    @Json(name = "reddit_name")
+    val redditName: String,
+    @Json(name = "reddit_url")
+    val redditUrl: String,
+    @Json(name = "released")
+    val released: String,
+    @Json(name = "reviews_count")
+    val reviewsCount: Int,
+    @Json(name = "reviews_text_count")
+    val reviewsTextCount: Int,
+    @Json(name = "saturated_color")
+    val saturatedColor: String,
+    @Json(name = "screenshots_count")
+    val screenshotsCount: Int,
+    @Json(name = "slug")
+    val slug: String,
+    @Json(name = "suggestions_count")
+    val suggestionsCount: Int,
+    @Json(name = "tba")
+    val tba: Boolean,
+    @Json(name = "twitch_count")
+    val twitchCount: Int,
+    @Json(name = "updated")
+    val updated: String,
+    @Json(name = "user_game")
+    val userGame: Any,
+    @Json(name = "website")
+    val website: String,
+    @Json(name = "youtube_count")
+    val youtubeCount: Int
+)
