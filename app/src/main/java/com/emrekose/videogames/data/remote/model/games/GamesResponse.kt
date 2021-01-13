@@ -19,7 +19,7 @@ data class GamesResponse(
     @Json(name = "noindex")
     val noindex: Boolean,
     @Json(name = "previous")
-    val previous: Any,
+    val previous: Any?,
     @Json(name = "results")
     val gamesResults: List<GamesResult>,
     @Json(name = "seo_description")

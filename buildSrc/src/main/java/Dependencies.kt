@@ -121,7 +121,7 @@ object Dependencies {
         }
 
         object Truth {
-            private const val version = "1.1.0"
+            private const val version = "1.1"
             const val truth = "com.google.truth:truth:$version"
         }
 

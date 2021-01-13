@@ -42,6 +42,4 @@ data class GamesResult(
     val tba: Boolean,
     @Json(name = "updated")
     val updated: String,
-    @Json(name = "user_game")
-    val userGame: Any
 )

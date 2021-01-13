@@ -82,8 +82,6 @@ data class GameDetailResponse(
     val twitchCount: Int,
     @Json(name = "updated")
     val updated: String,
-    @Json(name = "user_game")
-    val userGame: Any,
     @Json(name = "website")
     val website: String,
     @Json(name = "youtube_count")
