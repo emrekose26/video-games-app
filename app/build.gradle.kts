@@ -3,20 +3,22 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("kotlin-android")
+    id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
+    compileSdkVersion(Configs.compileSdkVersion)
+    buildToolsVersion(Configs.buildToolVersion)
 
     defaultConfig {
-        applicationId = "com.emrekose.videogames"
-        minSdkVersion(21)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Configs.applicationId
+        minSdkVersion(Configs.minSdkVersion)
+        targetSdkVersion(Configs.targetSdkVersion)
+        versionCode = Configs.versionCode
+        versionName = Configs.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Configs.testInstrumentationRunner
     }
 
     buildTypes {
@@ -34,15 +36,72 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    testImplementation("junit:junit:4.+")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
+    // Kotlin
+    implementation(Dependencies.Kotlin.kotlin)
+    implementation(Dependencies.Kotlin.Coroutines.core)
+    implementation(Dependencies.Kotlin.Coroutines.android)
+
+    // AndroidX
+    implementation(Dependencies.AndroidX.AppCompat.appcompat)
+    implementation(Dependencies.AndroidX.RecyclerView.recyclerview)
+    implementation(Dependencies.AndroidX.ConstraintLayout.constraintLayout)
+    implementation(Dependencies.AndroidX.Fragment.fragment)
+    implementation(Dependencies.AndroidX.Core.ktx)
+    implementation(Dependencies.AndroidX.Lifecycle.viewModel)
+    implementation(Dependencies.AndroidX.Lifecycle.liveData)
+    implementation(Dependencies.AndroidX.Lifecycle.runtime)
+    implementation(Dependencies.AndroidX.Hilt.viewModel)
+    kapt(Dependencies.AndroidX.Hilt.compiler)
+
+    // Material Design
+    implementation(Dependencies.Material.material)
+
+    // Dagger-Hilt
+    implementation(Dependencies.Dagger.hiltAndroid)
+    kapt(Dependencies.Dagger.hiltAndroidCompiler)
+
+    // AAC
+    implementation(Dependencies.AndroidX.Room.runtime)
+    implementation(Dependencies.AndroidX.Room.ktx)
+    kapt(Dependencies.AndroidX.Room.compiler)
+    implementation(Dependencies.AndroidX.Navigation.fragment)
+    implementation(Dependencies.AndroidX.Navigation.ui)
+
+    // Networking
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.OkHttp.okhttp)
+    implementation(Dependencies.OkHttp.loggingInterceptor)
+
+    // Moshi
+    implementation(Dependencies.Moshi.moshi)
+    implementation(Dependencies.Retrofit.moshiConverter)
+    kapt(Dependencies.Moshi.moshiCodegen)
+
+    // Glide
+    implementation(Dependencies.Glide.glide)
+    kapt(Dependencies.Glide.compiler)
+
+    // Timber
+    implementation(Dependencies.Timber.timber)
+
+    // Testing
+    testImplementation(Dependencies.Test.Junit.junit)
+    testImplementation(Dependencies.Test.AndroidX.Core.test)
+    testImplementation(Dependencies.Test.Mockk.unit)
+    testImplementation(Dependencies.Test.Truth.truth)
+    testImplementation(Dependencies.Test.AndroidX.Arch.core)
+    testImplementation(Dependencies.Kotlin.Coroutines.test)
+    testImplementation(Dependencies.OkHttp.mockWebServer)
+    testImplementation(Dependencies.AndroidX.Room.testing)
+
+    androidTestImplementation(Dependencies.Test.AndroidX.Junit.ktx)
+    androidTestImplementation(Dependencies.Test.AndroidX.Espresso.espresso)
 }
