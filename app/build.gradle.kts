@@ -103,5 +103,6 @@ dependencies {
     testImplementation(Dependencies.AndroidX.Room.testing)
 
     androidTestImplementation(Dependencies.Test.AndroidX.Junit.ktx)
+    androidTestImplementation(Dependencies.Test.AndroidX.Arch.core)
     androidTestImplementation(Dependencies.Test.AndroidX.Espresso.espresso)
 }
