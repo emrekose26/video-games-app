@@ -36,9 +36,10 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(
                 MoshiConverterFactory.create(
                     Moshi.Builder().add(KotlinJsonAdapterFactory()).build()

@@ -1,9 +1,12 @@
 package com.emrekose.videogames.ui.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "games")
 data class GameItem(
     @field:PrimaryKey
@@ -13,4 +16,4 @@ data class GameItem(
     val backgroundImage: String?,
     val metacritic: Int?,
     val released: String,
-)
+): Parcelable
