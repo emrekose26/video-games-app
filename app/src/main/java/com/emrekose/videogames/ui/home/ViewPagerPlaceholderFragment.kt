@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.emrekose.videogames.databinding.FragmentMainPlaceholderBinding
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.Constants.ARG_GAME
+import com.emrekose.videogames.utils.loadImage
 
 class ViewPagerPlaceholderFragment: Fragment() {
 
@@ -23,7 +24,7 @@ class ViewPagerPlaceholderFragment: Fragment() {
         val game: GameItem? = arguments?.getParcelable(ARG_GAME)
 
         binding?.placeholderGameName?.text = game?.name
-        // TODO image with Glide
+        binding?.placeholderGameImg?.loadImage(game?.backgroundImage)
     }
 
     override fun onDestroy() {

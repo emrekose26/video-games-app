@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emrekose.videogames.common.BaseDiffCallback
 import com.emrekose.videogames.databinding.ItemGameBinding
 import com.emrekose.videogames.ui.model.GameItem
+import com.emrekose.videogames.utils.loadImage
 
 class GamesRecyclerViewAdapter: ListAdapter<GameItem, GamesRecyclerViewAdapter.ViewHolder>(GamesDiffCallback) {
 
@@ -24,7 +25,9 @@ class GamesRecyclerViewAdapter: ListAdapter<GameItem, GamesRecyclerViewAdapter.V
         }
 
         fun bind(games: GameItem?) {
-            // TODO item attributes
+            binding.gameName.text = games?.name
+            binding.gameImage.loadImage(games?.backgroundImage)
+            binding.gameRatingAndReleased.text = "${games?.metacritic} - ${games?.released}"
         }
     }
 
