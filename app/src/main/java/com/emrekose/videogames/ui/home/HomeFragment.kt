@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.emrekose.videogames.R
 import com.emrekose.videogames.common.Resource
 import com.emrekose.videogames.databinding.FragmentHomeBinding
+import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.gone
 import com.emrekose.videogames.utils.visible
 import com.google.android.material.tabs.TabLayoutMediator
@@ -28,7 +32,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = GamesRecyclerViewAdapter()
+        adapter = GamesRecyclerViewAdapter(this::onGameClick)
         binding?.homeRecyclerview?.adapter = adapter
 
         viewModel.getAllGames()
@@ -48,7 +52,7 @@ class HomeFragment : Fragment() {
 
                         adapter.submitList(recyclerViewList)
 
-                        val pagerAdapter = HomeViewPager2Adapter(this, viewPagerList)
+                        val pagerAdapter = HomeViewPager2Adapter(this, viewPagerList, this::onGameClick)
                         binding?.mainViewPager?.adapter = pagerAdapter
 
                         TabLayoutMediator(binding?.mainTabLayout!!, binding?.mainViewPager!!) { tab, position -> }.attach()
@@ -61,5 +65,12 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun onGameClick(game: GameItem?) {
+        val bundle = bundleOf(
+            "game" to game,
+        )
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 }

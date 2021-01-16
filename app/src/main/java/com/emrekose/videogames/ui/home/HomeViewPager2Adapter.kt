@@ -8,13 +8,14 @@ import com.emrekose.videogames.utils.Constants.ARG_GAME
 
 class HomeViewPager2Adapter(
     fragment: Fragment,
-    val listOfGames: List<GameItem>
+    val listOfGames: List<GameItem>,
+    val onGameClick: (GameItem?) -> Unit
 ): FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = listOfGames.size
 
     override fun createFragment(position: Int): Fragment {
-        val fragment = ViewPagerPlaceholderFragment()
+        val fragment = ViewPagerPlaceholderFragment(onGameClick)
 
         when(position) {
             0 -> fragment.arguments = Bundle().apply {

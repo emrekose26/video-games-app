@@ -27,5 +27,11 @@
         android:id="@+id/detailFragment"
         android:name="com.emrekose.videogames.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+
+        <argument
+            android:name="game"
+            app:argType="com.emrekose.videogames.ui.model.GameItem" />
+
+    </fragment>
 </navigation>

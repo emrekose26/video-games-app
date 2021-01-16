@@ -8,13 +8,14 @@ import com.emrekose.videogames.common.BaseDiffCallback
 import com.emrekose.videogames.databinding.ItemGameBinding
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.loadImage
+import timber.log.Timber
 
-class GamesRecyclerViewAdapter: ListAdapter<GameItem, GamesRecyclerViewAdapter.ViewHolder>(GamesDiffCallback) {
+class GamesRecyclerViewAdapter(private val onGameClick: (GameItem?) -> Unit): ListAdapter<GameItem, GamesRecyclerViewAdapter.ViewHolder>(GamesDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder.create(LayoutInflater.from(parent.context), parent)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position), onGameClick)
 
     class ViewHolder(private val binding: ItemGameBinding): RecyclerView.ViewHolder(binding.root) {
         companion object {
@@ -24,10 +25,14 @@ class GamesRecyclerViewAdapter: ListAdapter<GameItem, GamesRecyclerViewAdapter.V
             }
         }
 
-        fun bind(games: GameItem?) {
+        fun bind(games: GameItem?, onGameClick: (GameItem?) -> Unit) {
             binding.gameName.text = games?.name
             binding.gameImage.loadImage(games?.backgroundImage)
             binding.gameRatingAndReleased.text = "${games?.metacritic} - ${games?.released}"
+
+            binding.root.setOnClickListener {
+                onGameClick(games)
+            }
         }
     }
 

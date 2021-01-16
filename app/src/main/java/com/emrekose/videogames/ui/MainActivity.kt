@@ -2,11 +2,14 @@ package com.emrekose.videogames.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.emrekose.videogames.R
 import com.emrekose.videogames.databinding.ActivityMainBinding
+import com.emrekose.videogames.utils.gone
+import com.emrekose.videogames.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,5 +32,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
+
+        bottomNavVisibiltyHandler(navController)
+    }
+
+    private fun bottomNavVisibiltyHandler(navController: NavController) {
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            if (destination.id == R.id.detailFragment) {
+                binding.bottomNav.gone()
+            } else {
+                binding.bottomNav.visible()
+            }
+        }
     }
 }

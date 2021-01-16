@@ -9,8 +9,9 @@ import com.emrekose.videogames.databinding.FragmentMainPlaceholderBinding
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.Constants.ARG_GAME
 import com.emrekose.videogames.utils.loadImage
+import timber.log.Timber
 
-class ViewPagerPlaceholderFragment: Fragment() {
+class ViewPagerPlaceholderFragment(private val onGameClick: (GameItem?) -> Unit): Fragment() {
 
     private var binding: FragmentMainPlaceholderBinding? = null
 
@@ -25,6 +26,10 @@ class ViewPagerPlaceholderFragment: Fragment() {
 
         binding?.placeholderGameName?.text = game?.name
         binding?.placeholderGameImg?.loadImage(game?.backgroundImage)
+
+        binding?.root?.setOnClickListener {
+            onGameClick(game)
+        }
     }
 
     override fun onDestroy() {

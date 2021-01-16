@@ -16,4 +16,5 @@ data class GameItem(
     val backgroundImage: String?,
     val metacritic: Int?,
     val released: String,
+    val description: String? = null
 ): Parcelable
