@@ -23,4 +23,7 @@ interface GamesDao {
 
     @Query("SELECT * FROM games")
     fun getAllGames(): Flow<List<GameItem>>
+
+    @Query("SELECT * FROM games WHERE game_id = :gameId")
+    fun getGameById(gameId: Int): Flow<GameItem>
 }

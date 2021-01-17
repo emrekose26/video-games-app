@@ -8,7 +8,6 @@ import com.emrekose.videogames.common.BaseDiffCallback
 import com.emrekose.videogames.databinding.ItemGameBinding
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.loadImage
-import timber.log.Timber
 
 class GamesRecyclerViewAdapter(private val onGameClick: (GameItem?) -> Unit): ListAdapter<GameItem, GamesRecyclerViewAdapter.ViewHolder>(GamesDiffCallback) {
 

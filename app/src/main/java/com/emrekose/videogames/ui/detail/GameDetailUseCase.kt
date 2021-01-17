@@ -23,4 +23,8 @@ class GameDetailUseCase @Inject constructor(
             }
         }
     }
+
+    suspend fun addGameToDb(game: GameItem) = gamesRepository.addGameToDb(game)
+
+    suspend fun deleteGameFromDb(gameId: Int) = gamesRepository.deleteGameFromDb(gameId)
 }

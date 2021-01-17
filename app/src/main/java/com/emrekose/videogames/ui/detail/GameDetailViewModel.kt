@@ -9,6 +9,7 @@ import com.emrekose.videogames.common.Resource
 import com.emrekose.videogames.ui.model.GameItem
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class GameDetailViewModel @ViewModelInject constructor(
     private val gameDetailUseCase: GameDetailUseCase
@@ -21,5 +22,17 @@ class GameDetailViewModel @ViewModelInject constructor(
         gameDetailUseCase.getGameDetails(gameId)
             .onEach { _gameDetailsLiveData.value = it }
             .launchIn(viewModelScope)
+    }
+
+    fun addGameToDb(game: GameItem) {
+        viewModelScope.launch {
+            gameDetailUseCase.addGameToDb(game)
+        }
+    }
+
+    fun deleteGameFromDb(gameId: Int) {
+        viewModelScope.launch {
+            gameDetailUseCase.deleteGameFromDb(gameId)
+        }
     }
 }

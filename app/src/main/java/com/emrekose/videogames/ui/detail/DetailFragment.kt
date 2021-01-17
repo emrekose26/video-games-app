@@ -42,6 +42,11 @@ class DetailFragment : Fragment() {
                     binding?.detailGameMetacriticRate?.text = resource.data.metacritic.toString()
                     binding?.detailGameDescription?.text = resource.data.description
                     binding?.detailImage?.loadImage(resource.data.backgroundImage)
+
+                    binding?.detailFab?.setOnClickListener {
+                        // TODO isFavorited state check
+                        viewModel.addGameToDb(resource.data)
+                    }
                 }
                 is Resource.Error -> {
                     Timber.e(resource.exception.localizedMessage)
