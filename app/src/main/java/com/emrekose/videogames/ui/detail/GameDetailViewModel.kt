@@ -18,6 +18,9 @@ class GameDetailViewModel @ViewModelInject constructor(
     private val _gameDetailsLiveData: MutableLiveData<Resource<GameItem>> = MutableLiveData()
     val gameDetailsLiveData: LiveData<Resource<GameItem>> = _gameDetailsLiveData
 
+    private val _favGameLiveData: MutableLiveData<GameItem> = MutableLiveData()
+    val favGameLiveData: LiveData<GameItem> = _favGameLiveData
+
     fun getGameDetails(gameId: Int) {
         gameDetailUseCase.getGameDetails(gameId)
             .onEach { _gameDetailsLiveData.value = it }
@@ -34,5 +37,11 @@ class GameDetailViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             gameDetailUseCase.deleteGameFromDb(gameId)
         }
+    }
+
+    fun getFavGameById(gameId: Int) {
+        gameDetailUseCase.getFavGameById(gameId)
+            .onEach { _favGameLiveData.value = it }
+            .launchIn(viewModelScope)
     }
 }

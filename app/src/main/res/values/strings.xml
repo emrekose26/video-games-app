@@ -5,4 +5,6 @@
     <string name="title_home">Anasayfa</string>
     <string name="title_favorites">Favoriler</string>
     <string name="empty_fav_warning">Favorilere daha önce hiç oyun eklemediniz.</string>
+    <string name="added_to_favorites">Favorilere eklendi</string>
+    <string name="deleted_from_favorites">Favorilerden çıkarıldı</string>
 </resources>
