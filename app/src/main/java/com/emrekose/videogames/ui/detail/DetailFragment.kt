@@ -52,8 +52,8 @@ class DetailFragment : Fragment() {
                         detailProgressbar.gone()
 
                         detailGameName.text = resource.data.name
-                        detailGameReleaseDate.text = resource.data.released
-                        detailGameMetacriticRate.text = resource.data.metacritic.toString()
+                        detailGameReleaseDate.text = "${getString(R.string.release_date)} : ${resource.data.released}"
+                        detailGameMetacriticRate.text = "${getString(R.string.metacritic)} : ${resource.data.metacritic.toString()}"
                         detailGameDescription.text = resource.data.description
                         detailImage.loadImage(resource.data.backgroundImage)
                     }

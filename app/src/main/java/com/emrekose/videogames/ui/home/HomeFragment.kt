@@ -39,17 +39,22 @@ class HomeFragment : Fragment() {
         viewModel.gamesLiveData.observe(viewLifecycleOwner, { resource ->
             when(resource) {
                 is Resource.Loading -> {
-                    Timber.e("Loading")
+                    binding?.apply {
+                        homeProgressbar.visible()
+                        homeTopArea.gone()
+                        homeRecyclerview.gone()
+                    }
                 }
                 is Resource.Success -> {
                     if(resource.data.isNotEmpty()) {
-                        val viewPagerList = resource.data.subList(0, 3)
-                        val recyclerViewList = resource.data.subList(3, resource.data.size)
+                        val viewPagerList = resource.data.subList(0, VIEWPAGER_GAME_COUNT)
+                        val recyclerViewList = resource.data.subList(VIEWPAGER_GAME_COUNT, resource.data.size)
 
-                        binding?.homeProgressbar?.gone()
-                        binding?.homeTopArea?.visible()
-                        binding?.homeRecyclerview?.visible()
-
+                        binding?.apply {
+                            homeProgressbar.gone()
+                            homeTopArea.visible()
+                            homeRecyclerview.visible()
+                        }
                         adapter.submitList(recyclerViewList)
 
                         val pagerAdapter = HomeViewPager2Adapter(this, viewPagerList, this::onGameClick)
@@ -72,5 +77,9 @@ class HomeFragment : Fragment() {
             "game" to game,
         )
         findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+    }
+
+    companion object {
+        const val VIEWPAGER_GAME_COUNT = 3
     }
 }

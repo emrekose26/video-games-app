@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
 
-        bottomNavVisibiltyHandler(navController)
+        bottomNavVisibilityHandler(navController)
     }
 
-    private fun bottomNavVisibiltyHandler(navController: NavController) {
+    private fun bottomNavVisibilityHandler(navController: NavController) {
         navController.addOnDestinationChangedListener{_, destination, _ ->
             if (destination.id == R.id.detailFragment) {
                 binding.bottomNav.gone()
