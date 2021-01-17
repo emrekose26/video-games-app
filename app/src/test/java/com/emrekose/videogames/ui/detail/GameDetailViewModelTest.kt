@@ -7,6 +7,8 @@ import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.MainCoroutineRule
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
+import io.mockk.coJustRun
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -15,9 +17,8 @@ import io.mockk.spyk
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
@@ -101,6 +102,34 @@ class GameDetailViewModelTest {
         Truth.assertThat(slot.captured).isEqualTo(Resource.Error(exception))
 
         verify { useCase.getGameDetails(1) }
+    }
+
+    @Test
+    fun `given game, when add to favorites, then verify added game`()  {
+        mainCoroutineRule.testDispatcher.runBlockingTest {
+            // Given
+            val game = GameItem(26, "Test Game", "bg1.png", 56, "19-09-2019", null)
+            coJustRun { useCase.addGameToDb(game) }
+
+            // When
+            viewModel.addGameToDb(game)
+
+            // Then
+            coVerify { useCase.addGameToDb(game) }
+        }
+    }
+
+    @Test
+    fun `given game, when delete game, then verify deleted game`() {
+        // Given
+        val game = GameItem(54, "Test Game 2", "bg2.png", 57, "19-09-2019", "test desc")
+        coJustRun { useCase.deleteGameFromDb(game.gameId) }
+
+        // When
+        viewModel.deleteGameFromDb(game.gameId)
+
+        // Then
+        coVerify { useCase.deleteGameFromDb(game.gameId) }
     }
 
     private fun createMockedObserver(): Observer<Resource<GameItem>> = spyk(Observer { })
