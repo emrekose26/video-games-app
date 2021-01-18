@@ -2,6 +2,7 @@ package com.emrekose.videogames.ui.favorites
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.emrekose.videogames.ui.model.FavGameItem
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.MainCoroutineRule
 import com.google.common.truth.Truth
@@ -37,10 +38,10 @@ class FavoritesViewModelTest {
     @InjectMockKs
     private lateinit var viewModel: FavoritesViewModel
 
-    private val gameList = listOf<GameItem>(
-        GameItem(1, "Game 1", "bg1.png", 12, "12-04-2001", null),
-        GameItem(2, "Game 2", "bg2.png", 56, "21-09-1999", "test desc2"),
-        GameItem(3, "Game 3", "bg3.png", 34, "01-12-2912", "test desc3")
+    private val gameList = listOf(
+        FavGameItem(1, "Game 1", "bg1.png", 12, "12-04-2001"),
+        FavGameItem(2, "Game 2", "bg2.png", 56, "21-09-1999"),
+        FavGameItem(3, "Game 3", "bg3.png", 34, "01-12-2912")
     )
 
     @Before
@@ -60,7 +61,7 @@ class FavoritesViewModelTest {
             viewModel.getAllFavGames()
 
             // Then
-            val slot = slot<List<GameItem>>()
+            val slot = slot<List<FavGameItem>>()
             verify { mockedObserver.onChanged(capture(slot)) }
 
             Truth.assertThat(slot.captured.size).isEqualTo(gameList.size)
@@ -69,5 +70,5 @@ class FavoritesViewModelTest {
         }
     }
 
-    private fun createMockedObserver(): Observer<List<GameItem>> = spyk(Observer { })
+    private fun createMockedObserver(): Observer<List<FavGameItem>> = spyk(Observer { })
 }

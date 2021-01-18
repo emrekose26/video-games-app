@@ -3,6 +3,7 @@ package com.emrekose.videogames.di
 import android.content.Context
 import androidx.room.Room
 import com.emrekose.videogames.data.local.AppDatabase
+import com.emrekose.videogames.data.local.FavGamesDao
 import com.emrekose.videogames.data.local.GamesDao
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,10 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideMovieDao(appDatabase: AppDatabase): GamesDao = appDatabase.gamesDao()
+    fun provideGamesDao(appDatabase: AppDatabase): GamesDao = appDatabase.gamesDao()
+
+    @Provides
+    @Singleton
+    fun provideFavGamesDao(appDatabase: AppDatabase): FavGamesDao = appDatabase.favGamesDao()
 
 }

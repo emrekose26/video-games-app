@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.emrekose.videogames.R
 import com.emrekose.videogames.databinding.FragmentFavoritesBinding
 import com.emrekose.videogames.ui.home.GamesRecyclerViewAdapter
+import com.emrekose.videogames.ui.model.FavGameItem
 import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.gone
 import com.emrekose.videogames.utils.visible
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoritesFragment : Fragment() {
     private var binding: FragmentFavoritesBinding? = null
     private val viewModel by viewModels<FavoritesViewModel>()
-    private lateinit var adapter: GamesRecyclerViewAdapter
+    private lateinit var adapter: FavGamesRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
@@ -30,7 +31,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = GamesRecyclerViewAdapter(this::onGameClick)
+        adapter = FavGamesRecyclerViewAdapter(this::onGameClick)
         binding?.favoritesRecyclerview?.adapter = adapter
 
         viewModel.getAllFavGames()
@@ -46,9 +47,9 @@ class FavoritesFragment : Fragment() {
         })
     }
 
-    private fun onGameClick(game: GameItem?) {
+    private fun onGameClick(favGame: FavGameItem?) {
         val bundle = bundleOf(
-            "game" to game,
+            "gameId" to favGame?.gameId,
         )
         findNavController().navigate(R.id.action_favoritesFragment_to_detailFragment, bundle)
     }

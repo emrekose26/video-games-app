@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emrekose.videogames.common.Resource
+import com.emrekose.videogames.ui.model.FavGameItem
+import com.emrekose.videogames.ui.model.GameDetailItem
 import com.emrekose.videogames.ui.model.GameItem
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,11 +17,11 @@ class GameDetailViewModel @ViewModelInject constructor(
     private val gameDetailUseCase: GameDetailUseCase
 ): ViewModel() {
 
-    private val _gameDetailsLiveData: MutableLiveData<Resource<GameItem>> = MutableLiveData()
-    val gameDetailsLiveData: LiveData<Resource<GameItem>> = _gameDetailsLiveData
+    private val _gameDetailsLiveData: MutableLiveData<Resource<GameDetailItem>> = MutableLiveData()
+    val gameDetailsLiveData: LiveData<Resource<GameDetailItem>> = _gameDetailsLiveData
 
-    private val _favGameLiveData: MutableLiveData<GameItem> = MutableLiveData()
-    val favGameLiveData: LiveData<GameItem> = _favGameLiveData
+    private val _favGameLiveData: MutableLiveData<FavGameItem> = MutableLiveData()
+    val favGameLiveData: LiveData<FavGameItem> = _favGameLiveData
 
     fun getGameDetails(gameId: Int) {
         gameDetailUseCase.getGameDetails(gameId)
@@ -27,15 +29,15 @@ class GameDetailViewModel @ViewModelInject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun addGameToDb(game: GameItem) {
+    fun addGameToDb(gameDetail: GameDetailItem) {
         viewModelScope.launch {
-            gameDetailUseCase.addGameToDb(game)
+            gameDetailUseCase.addFavGameToDb(gameDetail)
         }
     }
 
     fun deleteGameFromDb(gameId: Int) {
         viewModelScope.launch {
-            gameDetailUseCase.deleteGameFromDb(gameId)
+            gameDetailUseCase.deleteFavGameFromDb(gameId)
         }
     }
 

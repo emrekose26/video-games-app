@@ -30,7 +30,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val gameId = DetailFragmentArgs.fromBundle(requireArguments()).game.gameId
+        val gameId = DetailFragmentArgs.fromBundle(requireArguments()).gameId
 
         getGameDetails(gameId)
         getGameFromDb(gameId)
@@ -53,7 +53,7 @@ class DetailFragment : Fragment() {
 
                         detailGameName.text = resource.data.name
                         detailGameReleaseDate.text = "${getString(R.string.release_date)} : ${resource.data.released}"
-                        detailGameMetacriticRate.text = "${getString(R.string.metacritic)} : ${resource.data.metacritic.toString()}"
+                        detailGameMetacriticRate.text = "${getString(R.string.metacritic)} : ${resource.data.metacritic}"
                         detailGameDescription.text = resource.data.description
                         detailImage.loadImage(resource.data.backgroundImage)
                     }

@@ -30,8 +30,8 @@
         tools:layout="@layout/fragment_detail" >
 
         <argument
-            android:name="game"
-            app:argType="com.emrekose.videogames.ui.model.GameItem" />
-
+            android:name="gameId"
+            app:argType="integer"
+            android:defaultValue="0"/>
     </fragment>
 </navigation>

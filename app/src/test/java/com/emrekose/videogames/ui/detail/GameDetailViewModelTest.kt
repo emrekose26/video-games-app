@@ -3,7 +3,7 @@ package com.emrekose.videogames.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.emrekose.videogames.common.Resource
-import com.emrekose.videogames.ui.model.GameItem
+import com.emrekose.videogames.ui.model.GameDetailItem
 import com.emrekose.videogames.utils.MainCoroutineRule
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
@@ -55,7 +55,7 @@ class GameDetailViewModelTest {
         viewModel.getGameDetails(1)
 
         // Then
-        val slot = slot<Resource<GameItem>>()
+        val slot = slot<Resource<GameDetailItem>>()
         verify { mockedObserver.onChanged(capture(slot)) }
 
         Truth.assertThat(slot.captured).isSameInstanceAs(Resource.Loading)
@@ -74,7 +74,7 @@ class GameDetailViewModelTest {
         viewModel.getGameDetails(1)
 
         // Then
-        val slot = slot<Resource<GameItem>>()
+        val slot = slot<Resource<GameDetailItem>>()
         verify { mockedObserver.onChanged(capture(slot)) }
 
         Truth.assertThat(Resource.Success(createFakeGameItem()).data.name).isEqualTo("EsEs")
@@ -96,7 +96,7 @@ class GameDetailViewModelTest {
         viewModel.getGameDetails(1)
 
         // then
-        val slot = slot<Resource<GameItem>>()
+        val slot = slot<Resource<GameDetailItem>>()
         verify { mockedObserver.onChanged(capture(slot)) }
 
         Truth.assertThat(slot.captured).isEqualTo(Resource.Error(exception))
@@ -108,41 +108,42 @@ class GameDetailViewModelTest {
     fun `given game, when add to favorites, then verify added game`()  {
         mainCoroutineRule.testDispatcher.runBlockingTest {
             // Given
-            val game = GameItem(26, "Test Game", "bg1.png", 56, "19-09-2019", null)
-            coJustRun { useCase.addGameToDb(game) }
+            val game = GameDetailItem(26, "Test Game", 56,  "19-09-2019", "bg.png", 12.6, "desc")
+            coJustRun { useCase.addFavGameToDb(game) }
 
             // When
             viewModel.addGameToDb(game)
 
             // Then
-            coVerify { useCase.addGameToDb(game) }
+            coVerify { useCase.addFavGameToDb(game) }
         }
     }
 
     @Test
     fun `given game, when delete game, then verify deleted game`() {
         // Given
-        val game = GameItem(54, "Test Game 2", "bg2.png", 57, "19-09-2019", "test desc")
-        coJustRun { useCase.deleteGameFromDb(game.gameId) }
+        val game = GameDetailItem(54, "Test Game 2", 99,  "01-02-2020", "bg.png", 19.7, "desc 2")
+        coJustRun { useCase.deleteFavGameFromDb(game.gameId) }
 
         // When
         viewModel.deleteGameFromDb(game.gameId)
 
         // Then
-        coVerify { useCase.deleteGameFromDb(game.gameId) }
+        coVerify { useCase.deleteFavGameFromDb(game.gameId) }
     }
 
-    private fun createMockedObserver(): Observer<Resource<GameItem>> = spyk(Observer { })
+    private fun createMockedObserver(): Observer<Resource<GameDetailItem>> = spyk(Observer { })
 
     private fun createException() = spyk(Exception("This is my error message"))
 
-    private fun createFakeGameItem() = GameItem(
+    private fun createFakeGameItem() = GameDetailItem(
         gameId = 26,
         name = "EsEs",
         backgroundImage = "eses.png",
         metacritic = 100,
         released = "19.06.1965",
-        description = "Lorem ipsum dolor sit amet"
+        description = "Lorem ipsum dolor sit amet",
+        rating = 99.9
     )
 
 }

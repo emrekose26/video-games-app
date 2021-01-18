@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
 
     private fun onGameClick(game: GameItem?) {
         val bundle = bundleOf(
-            "game" to game,
+            "gameId" to game?.gameId,
         )
         findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
