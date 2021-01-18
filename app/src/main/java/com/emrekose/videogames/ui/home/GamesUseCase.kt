@@ -23,4 +23,10 @@ class GamesUseCase @Inject constructor(
             }
         }
     }
+
+    suspend fun saveGamesToLocale(gameList: List<GameItem>) =
+        gamesRepository.saveGameToLocale(gameList)
+
+    fun getGameFromLocale(query: String): Flow<List<GameItem>> =
+        gamesRepository.getGameFromLocale(query)
 }

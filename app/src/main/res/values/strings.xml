@@ -8,4 +8,6 @@
     <string name="fragment_detail">Detaylar</string>
     <string name="release_date">Release Date</string>
     <string name="metacritic">Metacritic</string>
+    <string name="search">Ara</string>
+    <string name="game_not_found">Üzgünüz, aradığınız oyun bulunamadı.</string>
 </resources>

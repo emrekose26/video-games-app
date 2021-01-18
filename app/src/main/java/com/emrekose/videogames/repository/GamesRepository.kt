@@ -17,15 +17,11 @@ class GamesRepository @Inject constructor(
 
     suspend fun getGameDetails(gameId: Int): GameDetailResponse = remoteDataSource.getGameDetails(gameId)
 
-    suspend fun addGameToDb(game: GameItem) = localDataSource.insertGame(game)
+    suspend fun saveGameToLocale(gameList: List<GameItem>) = localDataSource.saveGamesToLocale(gameList)
 
-    suspend fun deleteGameFromDb(gameId: Int) = localDataSource.deleteGame(gameId)
-
-    fun getAllCachedGames(): Flow<List<GameItem>> = localDataSource.getAllGames()
+    fun getGameFromLocale(query: String): Flow<List<GameItem>> = localDataSource.getGameByName(query)
 
     fun getAllFavGames(): Flow<List<FavGameItem>> = localDataSource.getAllFavGames()
-
-    // fun getFavGameById(gameId: Int): Flow<GameItem> = localDataSource.getGameById(gameId)
 
     suspend fun addFavGameToDb(favGameItem: FavGameItem) = localDataSource.addFavGame(favGameItem)
 

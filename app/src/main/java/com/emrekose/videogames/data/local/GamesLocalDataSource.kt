@@ -10,11 +10,13 @@ class GamesLocalDataSource @Inject constructor(
 ) {
     fun getAllGames() = gamesDao.getAllGames()
 
-    fun getGameById(gameId: Int) = gamesDao.getGameById(gameId)
+    fun getGameByName(query: String) = gamesDao.getGameByName(query)
 
     suspend fun insertGame(game: GameItem) = gamesDao.insertGame(game)
 
     suspend fun deleteGame(gameId: Int) = gamesDao.deleteGame(gameId)
+
+    suspend fun saveGamesToLocale(gameList: List<GameItem>) = gamesDao.saveGamesToLocale(gameList)
 
     fun getAllFavGames() = favGamesDao.getAllFavGames()
 

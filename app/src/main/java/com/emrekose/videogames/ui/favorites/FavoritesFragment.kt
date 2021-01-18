@@ -10,9 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.emrekose.videogames.R
 import com.emrekose.videogames.databinding.FragmentFavoritesBinding
-import com.emrekose.videogames.ui.home.GamesRecyclerViewAdapter
 import com.emrekose.videogames.ui.model.FavGameItem
-import com.emrekose.videogames.ui.model.GameItem
 import com.emrekose.videogames.utils.gone
 import com.emrekose.videogames.utils.visible
 import dagger.hilt.android.AndroidEntryPoint

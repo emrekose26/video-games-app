@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.emrekose.videogames.common.Resource
 import com.emrekose.videogames.ui.model.FavGameItem
 import com.emrekose.videogames.ui.model.GameDetailItem
-import com.emrekose.videogames.ui.model.GameItem
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
