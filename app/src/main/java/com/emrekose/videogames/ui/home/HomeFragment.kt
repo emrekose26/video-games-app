@@ -86,9 +86,9 @@ class HomeFragment : Fragment() {
 
     private fun getCachedGamesBySearchQuery() {
         sharedViewModel.searchQuery.observe(viewLifecycleOwner, { query ->
-            viewModel.getGameFromLocale(query)
             if (query.length >= 3) {
                 binding?.homeTopArea?.gone()
+                viewModel.getGameFromLocale(query)
                 viewModel.cachedGamesLiveData.observe(viewLifecycleOwner, { cachedGames ->
                     if(cachedGames.isNotEmpty()) {
                         binding?.homeEmptyText?.gone()
@@ -102,6 +102,7 @@ class HomeFragment : Fragment() {
             } else {
                 binding?.homeTopArea?.visible()
                 binding?.homeEmptyText?.gone()
+                binding?.homeRecyclerview?.visible()
                 adapter.submitList(recyclerViewList)
             }
         })
